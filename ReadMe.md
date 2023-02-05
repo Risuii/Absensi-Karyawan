@@ -7,6 +7,11 @@ Project mengenai simple CRUD absensi app
 - Database: MySQL
 - MessageBroker: RabbitMQ
 
+## Migration
+- Buat Schema di database MySQL dengan nama `absensi`
+- Migrasi database untuk setting database dengan perintah :
+`migrate -path db/migration -database "mysql://(usernameDB):(passwordDB)@tcp(localhost:3306)/(namaDB)" -verbose up;`
+
 ## Start Project
 - go run ./app/main.go
 

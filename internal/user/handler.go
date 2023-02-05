@@ -89,6 +89,7 @@ func (handler *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 }
 
 func (handler *UserHandler) Logout(w http.ResponseWriter, r *http.Request) {
+	var res response.Response
 
 	http.SetCookie(w, &http.Cookie{
 		Name:     "token",
@@ -105,4 +106,10 @@ func (handler *UserHandler) Logout(w http.ResponseWriter, r *http.Request) {
 		HttpOnly: true,
 		MaxAge:   -1,
 	})
+
+	msg := "Success Logout"
+
+	res = response.Success(response.StatusOK, msg)
+
+	res.JSON(w)
 }

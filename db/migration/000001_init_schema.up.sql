@@ -1,4 +1,4 @@
-CREATE TABLE `github.com/Risuii`.`employee` (
+CREATE TABLE `absensi`.`employee` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NULL,
   `password` VARCHAR(255) NULL,
@@ -10,7 +10,7 @@ CREATE TABLE `github.com/Risuii`.`employee` (
   PRIMARY KEY (`ID`)
 );
 
-CREATE TABLE `github.com/Risuii`.`activity` (
+CREATE TABLE `absensi`.`activity` (
     `ID` INT NOT NULL AUTO_INCREMENT,
     `userID` INT NOT NULL,
     `deskripsi` VARCHAR(255) NULL,
@@ -20,7 +20,7 @@ CREATE TABLE `github.com/Risuii`.`activity` (
     FOREIGN KEY (`userID`) REFERENCES employee(`ID`)
 );
 
-CREATE TABLE `github.com/Risuii`.`absen` (
+CREATE TABLE `absensi`.`absen` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `userID` INT NOT NULL,
   `name` VARCHAR(255) NULL,
