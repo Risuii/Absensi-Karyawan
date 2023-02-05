@@ -202,7 +202,7 @@ func TestRiwayatRepo(t *testing.T) {
 
 		defer db.Close()
 
-		query := fmt.Sprintf(`SELECT id, userID, deskripsi, created_at, update_at FROM %s WHERE DATE(created_at) BETWEEN '%s' AND '%s' ORDER BY created_at asc`, constant.TableActivity, "2000-01-01", "2000-01-02")
+		query := fmt.Sprintf(`SELECT id, userID, deskripsi, created_at, update_at FROM %s WHERE DATE(created_at) BETWEEN '%s' AND '%s' ORDER BY created_at asc`, constant.TableActivity, dateStruct.From, dateStruct.To)
 		rows := sqlmock.NewRows([]string{"id", "userID", "deskripsi", "created_at", "update_at"}).AddRow(activityStruct.ID, activityStruct.UserID, activityStruct.Description, activityStruct.CreatedAt, activityStruct.UpdateAt)
 		ctx := context.TODO()
 
