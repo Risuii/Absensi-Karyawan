@@ -3,6 +3,7 @@ package activity_test
 import (
 	"context"
 	"fmt"
+	"regexp"
 	"testing"
 	"time"
 
@@ -177,23 +178,41 @@ func TestDeleteRepo(t *testing.T) {
 }
 
 func TestRiwayatRepo(t *testing.T) {
-	// t.Run("Riwayat All Params Not Nill", func(t *testing.T) {
-	// 	db, mock := mock.NewMock()
-	// 	repo := activity.NewActivityRepositoryImpl(db, constant.TableActivity)
+	t.Run("Riwayat All Params Not Nill", func(t *testing.T) {
+		db, mock := mock.NewMock()
+		repo := activity.NewActivityRepositoryImpl(db, constant.TableActivity)
 
-	// 	defer db.Close()
+		defer db.Close()
 
-	// 	query := fmt.Sprintf(`SELECT id, userID, deskripsi, created_at, update_at FROM %s WHERE DATE(created_at) BETWEEN '%s' AND '%s' ORDER BY created_at asc`, constant.TableActivity, "2000-01-01", "2000-01-02")
-	// 	rows := sqlmock.NewRows([]string{"id", "userID", "deskripsi", "created_at", "update_at"}).AddRow(activityStruct.ID, activityStruct.UserID, activityStruct.Description, activityStruct.CreatedAt, activityStruct.UpdateAt)
-	// 	ctx := context.TODO()
+		query := fmt.Sprintf(`SELECT id, userID, deskripsi, created_at, update_at FROM %s WHERE DATE(created_at) BETWEEN '%s' AND '%s' ORDER BY created_at asc`, constant.TableActivity, dateStruct.From, dateStruct.To)
+		rows := sqlmock.NewRows([]string{"id", "userID", "deskripsi", "created_at", "update_at"}).AddRow(activityStruct.ID, activityStruct.UserID, activityStruct.Description, activityStruct.CreatedAt, activityStruct.UpdateAt)
+		ctx := context.TODO()
 
-	// 	mock.ExpectQuery(query).WillReturnRows(rows)
+		mock.ExpectQuery(regexp.QuoteMeta(query)).WillReturnRows(rows)
 
-	// 	activityStruct, err := repo.Riwayat(ctx, activityStruct.ID, dateStruct)
+		activityStruct, err := repo.Riwayat(ctx, activityStruct.ID, dateStruct)
 
-	// 	assert.NotEmpty(t, activityStruct)
-	// 	assert.NoError(t, err)
-	// })
+		assert.NotEmpty(t, activityStruct)
+		assert.NoError(t, err)
+	})
+
+	t.Run("Riwayat Params To Nill", func(t *testing.T) {
+		db, mock := mock.NewMock()
+		repo := activity.NewActivityRepositoryImpl(db, constant.TableActivity)
+
+		defer db.Close()
+
+		query := fmt.Sprintf(`SELECT id, userID, deskripsi, created_at, update_at FROM %s WHERE DATE(created_at) BETWEEN '%s' AND '%s' ORDER BY created_at asc`, constant.TableActivity, "2000-01-01", "2000-01-02")
+		rows := sqlmock.NewRows([]string{"id", "userID", "deskripsi", "created_at", "update_at"}).AddRow(activityStruct.ID, activityStruct.UserID, activityStruct.Description, activityStruct.CreatedAt, activityStruct.UpdateAt)
+		ctx := context.TODO()
+
+		mock.ExpectQuery(regexp.QuoteMeta(query)).WillReturnRows(rows)
+
+		activityStruct, err := repo.Riwayat(ctx, activityStruct.ID, dateStruct)
+
+		assert.NotEmpty(t, activityStruct)
+		assert.NoError(t, err)
+	})
 
 	t.Run("Riwayat Error", func(t *testing.T) {
 		db, mock := mock.NewMock()
