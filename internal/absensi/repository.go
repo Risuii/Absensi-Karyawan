@@ -7,10 +7,11 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/streadway/amqp"
+
 	"github.com/Risuii/config"
 	"github.com/Risuii/helpers/exception"
 	"github.com/Risuii/models/absensis"
-	"github.com/streadway/amqp"
 )
 
 type (

@@ -17,7 +17,6 @@ import (
 	"github.com/Risuii/helpers/exception"
 	"github.com/Risuii/helpers/response"
 	"github.com/Risuii/internal/activity"
-
 	"github.com/Risuii/models/activitys"
 	"github.com/Risuii/tests/activity/mocks"
 )
